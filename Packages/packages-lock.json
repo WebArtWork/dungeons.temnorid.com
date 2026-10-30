@@ -1,107 +1,119 @@
 {
   "dependencies": {
     "com.itkamianets.3d-constructor-character-view-camera": {
-      "version": "file:../../3d-constructor-character-view-camera",
+      "version": "https://github.com/IT-Kamianets/3d-constructor-character-view-camera.git",
       "depth": 0,
-      "source": "local",
+      "source": "git",
       "dependencies": {
         "com.itkamianets.3d-unity-core": "0.1.0",
         "com.itkamianets.3d-unity-input": "0.1.0",
         "com.itkamianets.3d-unity-character": "0.1.0",
         "com.unity.modules.physics": "1.0.0"
-      }
+      },
+      "hash": "dbbd9e72e5aefb01b53019c91c7cfe1f2ee3facb"
     },
     "com.itkamianets.3d-constructor-character-view-controls": {
-      "version": "file:../../3d-constructor-character-view-controls",
+      "version": "https://github.com/IT-Kamianets/3d-constructor-character-view-controls.git",
       "depth": 0,
-      "source": "local",
+      "source": "git",
       "dependencies": {
         "com.itkamianets.3d-unity-core": "0.1.0",
         "com.itkamianets.3d-unity-input": "0.1.0",
         "com.itkamianets.3d-unity-character": "0.1.0",
         "com.itkamianets.3d-constructor-character-view-camera": "0.1.0"
-      }
+      },
+      "hash": "51ca9abf707f796748c684b83336e1be9bcb4d8d"
     },
     "com.itkamianets.3d-unity-ai": {
-      "version": "file:../../3d-unity-ai",
+      "version": "https://github.com/IT-Kamianets/3d-unity-ai.git",
       "depth": 0,
-      "source": "local",
+      "source": "git",
       "dependencies": {
         "com.unity.modules.ai": "1.0.0",
         "com.unity.modules.physics": "1.0.0"
-      }
+      },
+      "hash": "70cb6dbe13c251341f6f359a6d3f0c32c7c55acb"
     },
     "com.itkamianets.3d-unity-character": {
-      "version": "file:../../3d-unity-character",
+      "version": "https://github.com/IT-Kamianets/3d-unity-character.git",
       "depth": 0,
-      "source": "local",
+      "source": "git",
       "dependencies": {
         "com.itkamianets.3d-unity-core": "0.1.0",
         "com.unity.modules.physics": "1.0.0",
         "com.unity.modules.animation": "1.0.0"
-      }
+      },
+      "hash": "d7a3f6bd49e72549b6a4457aca9d52bfbff01c6b"
     },
     "com.itkamianets.3d-unity-combat": {
-      "version": "file:../../3d-unity-combat",
+      "version": "https://github.com/IT-Kamianets/3d-unity-combat.git",
       "depth": 0,
-      "source": "local",
+      "source": "git",
       "dependencies": {
         "com.unity.modules.physics": "1.0.0"
-      }
+      },
+      "hash": "54c3a9d755a3929f3726a47eed1e431ac5c01bb6"
     },
     "com.itkamianets.3d-unity-core": {
-      "version": "file:../../3d-unity-core",
+      "version": "https://github.com/IT-Kamianets/3d-unity-core.git",
       "depth": 0,
-      "source": "local",
-      "dependencies": {}
+      "source": "git",
+      "dependencies": {},
+      "hash": "d4d8f944759ae32d7ee2a3111aa1904c3f53a06a"
     },
     "com.itkamianets.3d-unity-feedback": {
-      "version": "file:../../3d-unity-feedback",
+      "version": "https://github.com/IT-Kamianets/3d-unity-feedback.git",
       "depth": 0,
-      "source": "local",
+      "source": "git",
       "dependencies": {
         "com.itkamianets.3d-unity-combat": "0.2.0"
-      }
+      },
+      "hash": "aaa9a04dd7ed33273a0953687650cab2c5a08c8e"
     },
     "com.itkamianets.3d-unity-graybox": {
-      "version": "file:../../3d-unity-graybox",
+      "version": "https://github.com/IT-Kamianets/3d-unity-graybox.git",
       "depth": 0,
-      "source": "local",
-      "dependencies": {}
+      "source": "git",
+      "dependencies": {},
+      "hash": "2d71d364902be7f37b7ea45e26a2c3e7fa07a9f9"
     },
     "com.itkamianets.3d-unity-input": {
-      "version": "file:../../3d-unity-input",
+      "version": "https://github.com/IT-Kamianets/3d-unity-input.git",
       "depth": 0,
-      "source": "local",
+      "source": "git",
       "dependencies": {
         "com.itkamianets.3d-unity-core": "0.1.0",
         "com.unity.inputsystem": "1.20.0",
         "com.unity.ugui": "2.6.0",
         "com.unity.modules.xr": "1.0.0"
-      }
+      },
+      "hash": "b380862568245c3389881c9af0105b0fc6207734"
     },
     "com.itkamianets.3d-unity-inventory": {
-      "version": "file:../../3d-unity-inventory",
+      "version": "https://github.com/IT-Kamianets/3d-unity-inventory.git",
       "depth": 0,
-      "source": "local",
-      "dependencies": {}
+      "source": "git",
+      "dependencies": {},
+      "hash": "cd26934b81437fa83d155c4f7015400b1f6adb10"
     },
     "com.itkamianets.3d-unity-save": {
-      "version": "file:../../3d-unity-save",
+      "version": "https://github.com/IT-Kamianets/3d-unity-save.git",
       "depth": 0,
-      "source": "local",
+      "source": "git",
       "dependencies": {
         "com.unity.nuget.newtonsoft-json": "3.2.2"
-      }
+      },
+      "hash": "9139076bcd35261d654c4241f37881da34aa0505"
     },
     "com.itkamianets.3d-unity-ui": {
-      "version": "file:../../3d-unity-ui",
+      "version": "https://github.com/IT-Kamianets/3d-unity-ui.git",
       "depth": 0,
-      "source": "local",
+      "source": "git",
       "dependencies": {
         "com.unity.ugui": "2.6.0",
         "com.unity.inputsystem": "1.20.0"
-      }
+      },
+      "hash": "8e6507c4f40f6b8366e9d17fb05a5c3032b6b59b"
     },
     "com.unity.ai.navigation": {
       "version": "2.0.15",
