@@ -1,0 +1,29 @@
+{
+  "name": "Temnorid.Dungeons",
+  "rootNamespace": "Temnorid.Dungeons",
+  "references": [
+    "ITKamianets.Engine.Core",
+    "ITKamianets.Engine.Input",
+    "ITKamianets.Engine.Save",
+    "ITKamianets.Engine.Inventory",
+    "ITKamianets.Engine.Combat",
+    "ITKamianets.Engine.AI",
+    "Unity.AI.Navigation",
+    "Unity.InputSystem",
+    "UnityEngine.UI",
+    "ITKamianets.Engine.Feedback",
+    "ITKamianets.Engine.Graybox",
+    "ITKamianets.Engine.UI"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": true,
+  "precompiledReferences": [
+    "Newtonsoft.Json.dll"
+  ],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

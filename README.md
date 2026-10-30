@@ -1,23 +1,102 @@
-# Character View starter
+# Temnorid Dungeons
 
-Start a **Character View** game on the [IT Kamianets 3D Engine](https://3d.itkamianets.com): 1st + 3rd person, games like GTA V, Cyberpunk 2077, Elden Ring.
+**Clear the ruins. Beat the boss. Keep the loot.**
 
-The camera and controls for this style are ready.
+Adventures, dungeons and the hunt for artefacts. A [Temnorid](https://temnorid.com) game for **Windows**, built on the [IT Kamianets 3D Engine](https://3d.itkamianets.com) with Unity 6000.6.
 
-## Start
+**Status:** in development, first playable not released yet. Website: https://dungeons.temnorid.com · Download: [Temnorid-Dungeons-Setup.exe](https://github.com/WebArtWork/dungeons.temnorid.com/releases/latest/download/Temnorid-Dungeons-Setup.exe)
 
-1. Clone this repository under your game's name.
-2. Open it in Unity Hub with Unity 6000.6: it is an empty Universal 3D project.
-3. Follow [AGENTS.md](AGENTS.md): add the engine packages, build the game. Hand it to your AI agent, or follow it yourself.
+## What it is
 
-Engine packages for this style: `3d-unity-core`, `3d-unity-scene`, `3d-unity-input`, `3d-unity-character`, `3d-unity-assets`, `3d-unity-audio`, `3d-constructor-character-view-camera`, `3d-constructor-character-view-controls`.
+Explore dangerous ruins, fight monsters, defeat bosses and find rare treasure. Win gear and magical artefacts for your heroes.
 
-Every package, with what it does and how to install it: https://3d.itkamianets.com/packages.md
+## The first playable
 
-## Changing an engine package
+The first playable is one compact dungeon: fight through a few monsters, face a boss with a visible attack warning, and take the treasure it guards.
 
-The `3d-*` packages are shared by every game. To change one, clone it into `Packages/` (Unity uses that copy instead of the git URL; git ignores it), work on a branch or your fork, and open a pull request to its `master` branch. [AGENTS.md](AGENTS.md) has the steps.
+### How a session goes
 
-## AI agents
+1. Enter the dungeon with a sword and one special ability, the shockwave.
+2. Move through corridors and rooms. Monsters notice you from a distance, chase you and attack. A few drop a green orb that heals you when you walk over it.
+3. Defeat the regular monsters to open the way to the boss room.
+4. Fight the boss. It has much more health and telegraphs its big attack, so you can dodge it.
+5. Open the chest the boss guarded (**E**): gold, the Ember Blade and a Boss Sigil go into your stash. Loot dropped by monsters is picked up by walking over it.
+6. Step into the glowing exit to finish the run, see what you won, and play again.
 
-[AGENTS.md](AGENTS.md) is the guide for any AI agent (Codex, Cursor, Copilot and others read it automatically); [CLAUDE.md](CLAUDE.md) points Claude Code to it.
+### Controls
+
+| Key | Action |
+| --- | --- |
+| W A S D | Move |
+| Mouse | Look around |
+| Shift | Run |
+| Space | Jump |
+| E | Interact |
+| Left mouse (hold) | Sword attack in front of you |
+| Right mouse | Shockwave: hurts everything around you, recharges in 6 seconds |
+| E | Open the chest |
+| V | Switch between third and first person |
+| Esc | Pause menu (resume, save, quit) |
+
+### Win and lose
+
+- **Win:** Defeat the boss, collect the loot and leave through the exit.
+- **Lose:** If your health reaches zero the run ends. Retry restarts the dungeon.
+
+### The scene
+
+One small dungeon made of blocks: an entrance, corridors, a few rooms and a boss room. Monsters are capsules, the boss is a larger shape.
+
+## How it connects to Lords
+
+Gear and magical artefacts found here will go to the heroes of Lords, which already send heroes into dungeons for loot.
+
+This is for a later phase: [Lords](https://lords.temnorid.com) is the central strategy game and every Temnorid game will be connected to it. **This version is fully offline and does not talk to Lords**; progress is saved locally on the player's PC. Keep identifiers and save data simple and stable so the connection is cheap to add later.
+
+## Scope of this version
+
+- One dungeon, 3 to 5 regular monsters, one boss, loot and a replay loop.
+- No random dungeons, levels or full character progression yet.
+
+Everything is drawn with Unity primitives (blocks, capsules, spheres), simple colours and text. No models, no paid assets. Every visible object has a stable asset id (for example `resources/wood-node`) so real models can replace the placeholders without touching gameplay.
+
+## For developers and agents
+
+- **Unity:** 6000.6, Universal 3D (URP). Open the folder in Unity Hub. `Library/` is rebuilt locally and not committed.
+- **Platform:** Windows only. Keyboard and mouse. One map, offline, local saves.
+- **Starts from:** the IT Kamianets 3D Engine Character View starter. [AGENTS.md](AGENTS.md) is still the starter's generic guide; this README is the game's own.
+- **Engine pieces this game uses:** the Character View set (`3d-unity-character`, the camera and controls), `3d-unity-core`, `3d-unity-input`, `3d-unity-inventory` (the loot stash), `3d-unity-save`, and two new shared packages written for this game: `3d-unity-combat` (health, teams, melee cone and area attacks) and `3d-unity-ai` (noticing, chasing over a NavMesh, attack requests). The monsters, the boss, loot, gates, the chest, the exit and the screens are written in this game (`Assets/Scripts`).
+- **Where code lives:**
+  - `3d-*` packages: generic, engine-level behaviour with no Temnorid content (combat, AI, inventory, save, ...).
+  - `temnorid-*` packages: Temnorid content shared by **several games** (for example `temnorid-character`). Never `temnorid-<game>-*`.
+  - `Assets/Scripts` in this project: this game's own rules, scene builders, HUD and menus.
+- **Packages while developing:** the packages sit in the shared workspace folder next to the games (`../3d-unity-core`, `../3d-unity-input`, `../3d-unity-character`, the two Character View packages, `../3d-unity-inventory`, `../3d-unity-save`, `../3d-unity-combat`, `../3d-unity-ai`) and `Packages/manifest.json` points at them with `file:../../<package>`. When they get their own repositories, only these paths change.
+- **Level building:** menu **Temnorid > Dungeons > Build Scene** (or `-executeMethod Temnorid.Dungeons.EditorTools.DungeonSceneBuilder.Build`) rebuilds `Assets/Scenes/Main.unity` from scratch: the rooms and corridors, the gates, 5 monsters and the boss, the chest, the exit, the hero, camera and lights, all from primitives. Do not edit that scene by hand. The NavMesh is baked at game start from the floor and wall colliders, and the monsters are switched on after it exists.
+- **Code map (`Assets/Scripts`):**
+  - `DungeonSession`: the rewards rules with no Unity in them (the stash of everything looted, the run's loot, completions, best time) and `DungeonSaveStore`.
+  - `DungeonGame`: the run (gates open when a room is cleared, loot drops, the chest, victory, defeat, pause, saving). `PlayerFighter`: sword, shockwave, chest. `Monster`: what a monster's attack does, its drop, the boss's slam with a red warning on the floor. `RoomGate`, `LootPickup`, `Chest`, `ExitPortal`, `HealthBar3D`, `DungeonHud` (all screens, plain uGUI), `Fx`, `AssetIdTag` (stable ids like `monsters/goblin` for future models).
+- **Tests:** `Assets/Tests/EditMode` covers the rewards and the save file (and `3d-unity-inventory` and `3d-unity-combat` have their own tests, run through `testables` in the manifest); `Assets/Tests/PlayMode` loads the scene, checks every monster stands on the NavMesh, that monsters chase and hurt the player, that clearing rooms opens the gates and that the boss, the chest and the exit finish the run.
+- **Save file:** `<persistent data path>/dungeons/default.json` (on Windows `%USERPROFILE%\AppData\LocalLow\Temnorid\Temnorid Dungeons\dungeons\default.json`): the stash, dungeons cleared and the best time.
+- **Windows build:** **Temnorid > Dungeons > Build Windows Player** (or `-executeMethod Temnorid.Dungeons.EditorTools.DungeonReleaseBuilder.BuildWindows`) writes `Builds/Windows/TemnoridDungeons` and a portable zip. `installer/Dungeons.iss` turns the folder into `Builds/Installer/Temnorid-Dungeons-Setup.exe` with Inno Setup.
+- **Do not add:** networking, Firebase, accounts, or any link to Lords in this version.
+
+## Website and downloads
+
+The `docs/` folder is this game's public website (`docs/index.html`, served at https://dungeons.temnorid.com through GitHub Pages; `docs/CNAME` holds the domain). It repeats the information in this README: what the game is, how to play, controls and the download button.
+
+The download button points to the latest GitHub Release asset:
+
+`https://github.com/WebArtWork/dungeons.temnorid.com/releases/latest/download/Temnorid-Dungeons-Setup.exe`
+
+Release steps (when the first playable is ready):
+
+1. Build the Windows player from Unity (File > Build Profiles > Windows).
+2. Wrap the build in a Windows installer named `Temnorid-Dungeons-Setup.exe`.
+3. Create a GitHub Release (tag `v0.1.0`) and attach that file.
+4. Open the website, click the button, install, play, save, restart, uninstall.
+
+When you change the game's description, controls or rules, update this README and `docs/index.html` together.
+
+## License
+
+See [LICENSE](LICENSE).

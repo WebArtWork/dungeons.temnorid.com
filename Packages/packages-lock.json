@@ -1,5 +1,108 @@
 {
   "dependencies": {
+    "com.itkamianets.3d-constructor-character-view-camera": {
+      "version": "file:../../3d-constructor-character-view-camera",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {
+        "com.itkamianets.3d-unity-core": "0.1.0",
+        "com.itkamianets.3d-unity-input": "0.1.0",
+        "com.itkamianets.3d-unity-character": "0.1.0",
+        "com.unity.modules.physics": "1.0.0"
+      }
+    },
+    "com.itkamianets.3d-constructor-character-view-controls": {
+      "version": "file:../../3d-constructor-character-view-controls",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {
+        "com.itkamianets.3d-unity-core": "0.1.0",
+        "com.itkamianets.3d-unity-input": "0.1.0",
+        "com.itkamianets.3d-unity-character": "0.1.0",
+        "com.itkamianets.3d-constructor-character-view-camera": "0.1.0"
+      }
+    },
+    "com.itkamianets.3d-unity-ai": {
+      "version": "file:../../3d-unity-ai",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {
+        "com.unity.modules.ai": "1.0.0",
+        "com.unity.modules.physics": "1.0.0"
+      }
+    },
+    "com.itkamianets.3d-unity-character": {
+      "version": "file:../../3d-unity-character",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {
+        "com.itkamianets.3d-unity-core": "0.1.0",
+        "com.unity.modules.physics": "1.0.0",
+        "com.unity.modules.animation": "1.0.0"
+      }
+    },
+    "com.itkamianets.3d-unity-combat": {
+      "version": "file:../../3d-unity-combat",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {
+        "com.unity.modules.physics": "1.0.0"
+      }
+    },
+    "com.itkamianets.3d-unity-core": {
+      "version": "file:../../3d-unity-core",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
+    "com.itkamianets.3d-unity-feedback": {
+      "version": "file:../../3d-unity-feedback",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {
+        "com.itkamianets.3d-unity-combat": "0.2.0"
+      }
+    },
+    "com.itkamianets.3d-unity-graybox": {
+      "version": "file:../../3d-unity-graybox",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
+    "com.itkamianets.3d-unity-input": {
+      "version": "file:../../3d-unity-input",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {
+        "com.itkamianets.3d-unity-core": "0.1.0",
+        "com.unity.inputsystem": "1.20.0",
+        "com.unity.ugui": "2.6.0",
+        "com.unity.modules.xr": "1.0.0"
+      }
+    },
+    "com.itkamianets.3d-unity-inventory": {
+      "version": "file:../../3d-unity-inventory",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
+    "com.itkamianets.3d-unity-save": {
+      "version": "file:../../3d-unity-save",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {
+        "com.unity.nuget.newtonsoft-json": "3.2.2"
+      }
+    },
+    "com.itkamianets.3d-unity-ui": {
+      "version": "file:../../3d-unity-ui",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {
+        "com.unity.ugui": "2.6.0",
+        "com.unity.inputsystem": "1.20.0"
+      }
+    },
     "com.unity.ai.navigation": {
       "version": "2.0.15",
       "depth": 0,
@@ -67,9 +170,30 @@
     },
     "com.unity.nuget.mono-cecil": {
       "version": "1.11.6",
-      "depth": 3,
+      "depth": 1,
       "source": "registry",
       "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.nuget.newtonsoft-json": {
+      "version": "3.2.2",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.pipeline": {
+      "version": "0.9.1-exp.1",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.test-framework": "1.1.33",
+        "com.unity.nuget.mono-cecil": "1.11.6",
+        "com.unity.modules.uielements": "1.0.0",
+        "com.unity.modules.jsonserialize": "1.0.0",
+        "com.unity.modules.screencapture": "1.0.0",
+        "com.unity.nuget.newtonsoft-json": "3.0.2"
+      },
       "url": "https://packages.unity.com"
     },
     "com.unity.profiling.core": {

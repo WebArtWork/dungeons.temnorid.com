@@ -1,5 +1,18 @@
 {
   "dependencies": {
+    "com.itkamianets.3d-constructor-character-view-camera": "file:../../3d-constructor-character-view-camera",
+    "com.itkamianets.3d-constructor-character-view-controls": "file:../../3d-constructor-character-view-controls",
+    "com.itkamianets.3d-unity-ai": "file:../../3d-unity-ai",
+    "com.itkamianets.3d-unity-character": "file:../../3d-unity-character",
+    "com.itkamianets.3d-unity-combat": "file:../../3d-unity-combat",
+    "com.itkamianets.3d-unity-core": "file:../../3d-unity-core",
+    "com.itkamianets.3d-unity-feedback": "file:../../3d-unity-feedback",
+    "com.itkamianets.3d-unity-graybox": "file:../../3d-unity-graybox",
+    "com.itkamianets.3d-unity-input": "file:../../3d-unity-input",
+    "com.itkamianets.3d-unity-inventory": "file:../../3d-unity-inventory",
+    "com.itkamianets.3d-unity-save": "file:../../3d-unity-save",
+    "com.itkamianets.3d-unity-ui": "file:../../3d-unity-ui",
+    "com.unity.nuget.newtonsoft-json": "3.2.2",
     "com.unity.ai.navigation": "2.0.15",
     "com.unity.ide.rider": "3.0.38",
     "com.unity.ide.visualstudio": "2.0.26",
@@ -44,6 +57,11 @@
     "com.unity.modules.vehicles": "1.0.0",
     "com.unity.modules.video": "1.0.0",
     "com.unity.modules.wind": "1.0.0",
-    "com.unity.modules.xr": "1.0.0"
-  }
+    "com.unity.modules.xr": "1.0.0",
+    "com.unity.pipeline": "0.9.1-exp.1"
+  },
+  "testables": [
+    "com.itkamianets.3d-unity-inventory",
+    "com.itkamianets.3d-unity-combat"
+  ]
 }
