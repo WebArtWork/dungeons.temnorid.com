@@ -10,8 +10,11 @@
     "com.itkamianets.3d-unity-graybox": "https://github.com/IT-Kamianets/3d-unity-graybox.git",
     "com.itkamianets.3d-unity-input": "https://github.com/IT-Kamianets/3d-unity-input.git",
     "com.itkamianets.3d-unity-inventory": "https://github.com/IT-Kamianets/3d-unity-inventory.git",
+    "com.itkamianets.3d-unity-net": "https://github.com/IT-Kamianets/3d-unity-net.git",
     "com.itkamianets.3d-unity-save": "https://github.com/IT-Kamianets/3d-unity-save.git",
+    "com.itkamianets.3d-unity-shell": "https://github.com/IT-Kamianets/3d-unity-shell.git",
     "com.itkamianets.3d-unity-ui": "https://github.com/IT-Kamianets/3d-unity-ui.git",
+    "com.itkamianets.3d-unity-update": "https://github.com/IT-Kamianets/3d-unity-update.git",
     "com.unity.nuget.newtonsoft-json": "3.2.2",
     "com.unity.ai.navigation": "2.0.15",
     "com.unity.ide.rider": "3.0.38",
@@ -59,9 +62,5 @@
     "com.unity.modules.wind": "1.0.0",
     "com.unity.modules.xr": "1.0.0",
     "com.unity.pipeline": "0.9.1-exp.1"
-  },
-  "testables": [
-    "com.itkamianets.3d-unity-inventory",
-    "com.itkamianets.3d-unity-combat"
-  ]
+  }
 }

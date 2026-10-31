@@ -35,6 +35,10 @@ namespace Temnorid.Dungeons
 		/// <summary>0 while the shockwave is recharging, 1 when it is ready.</summary>
 		public float AbilityReady => Mathf.Clamp01(1f - (_nextAbility - Time.time) / AbilityCooldown);
 
+		/// <summary>Counts swings and shockwaves, so other players' machines can show them.</summary>
+		public int SwingCount { get; private set; }
+		public int ShockCount { get; private set; }
+
 		float _nextAttack;
 		float _nextAbility;
 		bool _wasInteractDown;
@@ -62,7 +66,7 @@ namespace Temnorid.Dungeons
 			var chest = Game.Chest;
 			if (chest != null && chest.CanOpen && chest.DistanceFrom(transform.position) <= 2.8f)
 			{
-				Prompt = "Press E to open the chest";
+				Prompt = Application.isMobilePlatform ? "Tap Use to open the chest" : "Press E to open the chest";
 				if (pressedNow) Game.OpenChest();
 			}
 
@@ -101,9 +105,16 @@ namespace Temnorid.Dungeons
 		void Swing()
 		{
 			_nextAttack = Time.time + AttackCooldown;
+			SwingCount++;
 			var direction = AimDirection();
 			var origin = transform.position;
-			CombatQueries.DamageInCone(origin, direction, AttackRange, AttackHalfAngle, Health.Team, new DamageInfo(AttackDamage, gameObject, origin, "melee"));
+			if (DungeonNet.SendsHits)
+			{
+				// A client's hit is a request: the host checks it and applies the damage.
+				foreach (var target in CombatQueries.FindInCone(origin, direction, AttackRange, AttackHalfAngle, Health.Team))
+					DungeonNet.Active.SendHit(target, "melee");
+			}
+			else CombatQueries.DamageInCone(origin, direction, AttackRange, AttackHalfAngle, Health.Team, new DamageInfo(AttackDamage, gameObject, origin, "melee"));
 
 			var slashPosition = origin + Vector3.up * 1.1f + direction * 1.5f;
 			Fx.Pulse(PrimitiveType.Cube, slashPosition, Quaternion.LookRotation(direction) * Quaternion.Euler(0f, 0f, 30f),
@@ -113,8 +124,14 @@ namespace Temnorid.Dungeons
 		void Shockwave()
 		{
 			_nextAbility = Time.time + AbilityCooldown;
+			ShockCount++;
 			var origin = transform.position;
-			CombatQueries.DamageInRadius(origin, AbilityRadius, Health.Team, new DamageInfo(AbilityDamage, gameObject, origin, "shockwave"));
+			if (DungeonNet.SendsHits)
+			{
+				foreach (var target in CombatQueries.FindInRadius(origin, AbilityRadius, Health.Team))
+					DungeonNet.Active.SendHit(target, "shockwave");
+			}
+			else CombatQueries.DamageInRadius(origin, AbilityRadius, Health.Team, new DamageInfo(AbilityDamage, gameObject, origin, "shockwave"));
 			Fx.Pulse(PrimitiveType.Cylinder, new Vector3(origin.x, 0.08f, origin.z), Quaternion.identity,
 				new Vector3(1f, 0.03f, 1f), new Vector3(AbilityRadius * 2f, 0.03f, AbilityRadius * 2f), new Color(0.3f, 0.85f, 1f), 0.35f);
 		}

@@ -1,6 +1,10 @@
 using ITKamianets.Engine.AI;
 using ITKamianets.Engine.Combat;
+using ITKamianets.Engine.Character;
+using ITKamianets.Engine.CharacterView;
 using ITKamianets.Engine.Core;
+using ITKamianets.Engine.Net;
+using ITKamianets.Engine.Shell;
 using ITKamianets.Engine.Input;
 using Unity.AI.Navigation;
 using UnityEngine;
@@ -48,6 +52,18 @@ namespace Temnorid.Dungeons
 		public DungeonSession Session { get; private set; }
 		public DungeonPhase Phase { get; private set; } = DungeonPhase.Playing;
 		public bool Paused { get; private set; }
+
+		/// <summary>The player opened another place (hero, profile): the game waits, offline, without showing the pause menu.</summary>
+		public bool UiHold { get; private set; }
+
+		/// <summary>The link to the other players when this is an online game, else null.</summary>
+		public DungeonNet Net { get; private set; }
+
+		/// <summary>Online: this hero has fallen and watches the others; the run goes on until everybody has fallen or the boss is beaten.</summary>
+		public bool LocalDown { get; private set; }
+
+		/// <summary>Monsters slain this run, by the whole party.</summary>
+		public int Kills { get; private set; }
 		public float RunTime { get; private set; }
 		public bool BossDead { get; private set; }
 		public bool NewBestTime { get; private set; }
@@ -70,6 +86,8 @@ namespace Temnorid.Dungeons
 			Surface.BuildNavMesh();
 			foreach (var monster in StartingMonsters) monster.gameObject.SetActive(true);
 
+			if (NetSession.Instance.IsOnline) Net = gameObject.AddComponent<DungeonNet>().Init(this);
+
 			PlayerHealth.Died += OnPlayerDied;
 		}
 
@@ -85,8 +103,8 @@ namespace Temnorid.Dungeons
 		void Update()
 		{
 			if (Phase != DungeonPhase.Playing) return;
-			if (!Paused) RunTime += Time.deltaTime;
-			if (EngineInput.Default.UI.Pause.WasPressedThisFrame()) SetPaused(!Paused);
+			if ((!Paused && !UiHold) || Net != null) RunTime += Time.deltaTime;
+			if (!UiHold && EngineInput.Default.UI.Pause.WasPressedThisFrame()) SetPaused(!Paused);
 		}
 
 		void OnApplicationQuit() => Save();
@@ -97,34 +115,75 @@ namespace Temnorid.Dungeons
 		{
 			if (Phase != DungeonPhase.Playing) return;
 			Paused = paused;
-			Time.timeScale = paused ? 0f : 1f;
-			EngineInput.Default.PlayerEnabled = !paused;
+			ApplyHold();
 			if (paused) Save();
+		}
+
+		/// <summary>Another place of the shell is open over the dungeon.</summary>
+		public void SetUiHold(bool hold)
+		{
+			if (Phase != DungeonPhase.Playing || UiHold == hold) return;
+			UiHold = hold;
+			ApplyHold();
+		}
+
+		// Online the dungeon never stops for one person: the menus open over it.
+		void ApplyHold()
+		{
+			var hold = Paused || UiHold;
+			Time.timeScale = hold && Net == null ? 0f : 1f;
+			EngineInput.Default.PlayerEnabled = !hold;
+		}
+
+		/// <summary>Saves, then leaves for the landing screen (closing any online game).</summary>
+		public void QuitToMenu()
+		{
+			Save();
+			ShellFlow.QuitToMenu();
 		}
 
 		// ---- what happens in the dungeon ----
 
 		void OnMonsterKilled(Monster monster)
 		{
-			if (monster.LootQuantity > 0) LootPickup.Spawn(monster.LootId, monster.LootQuantity, monster.transform.position);
-			if (monster.HealDrop > 0f) LootPickup.Spawn(Loot.HealthOrb, Mathf.RoundToInt(monster.HealDrop), monster.transform.position + new Vector3(1f, 0f, 0.6f));
-
-			if (monster.IsBoss)
+			if (monster.LootQuantity > 0)
 			{
-				BossDead = true;
-				Chest.Reveal(monster.transform.position);
-				Exit.Open();
-				ShowToast("The boss has fallen! Open the chest.");
-				EngineLog.Info(Log, "The boss is dead.");
+				var drop = LootPickup.Spawn(monster.LootId, monster.LootQuantity, monster.transform.position);
+				Net?.Register(drop);
+			}
+			if (monster.HealDrop > 0f)
+			{
+				var orb = LootPickup.Spawn(Loot.HealthOrb, Mathf.RoundToInt(monster.HealDrop), monster.transform.position + new Vector3(1f, 0f, 0.6f));
+				Net?.Register(orb);
 			}
 
-			foreach (var gate in Gates)
+			Kills++;
+			Net?.MonsterKilled(monster);
+			if (monster.IsBoss) BossFell(monster.transform.position);
+
+			for (var i = 0; i < Gates.Length; i++)
 			{
+				var gate = Gates[i];
 				if (gate.IsOpen || AnyAliveIn(gate.Room)) continue;
 				gate.Open();
+				Net?.GateOpened(i);
 				ShowToast("A door opens.");
 			}
 		}
+
+		/// <summary>The boss is dead, here or (on a client) on the host: the chest appears and the exit opens.</summary>
+		public void BossFell(Vector3 position)
+		{
+			if (BossDead) return;
+			BossDead = true;
+			Chest.Reveal(position);
+			Exit.Open();
+			ShowToast("The boss has fallen! Open the chest.");
+			EngineLog.Info(Log, "The boss is dead.");
+		}
+
+		/// <summary>Client: the host says a monster died.</summary>
+		public void CountKill() => Kills++;
 
 		static bool AnyAliveIn(int room)
 		{
@@ -167,21 +226,60 @@ namespace Temnorid.Dungeons
 				ShowToast("Take the treasure from the chest first.");
 				return;
 			}
-			Phase = DungeonPhase.Victory;
-			NewBestTime = Session.CompleteRun(RunTime);
+			if (Net != null)
+			{
+				// Online the host ends the run for everybody once the living heroes are out (or after a short wait).
+				ShowToast("Waiting for the others to leave...");
+				Net.Finish();
+				return;
+			}
+			EndRun(true);
+		}
+
+		/// <summary>Ends the run: victory or defeat. Online it is the host that decides and tells everybody.</summary>
+		public void EndRun(bool victory)
+		{
+			if (Phase != DungeonPhase.Playing) return;
+			Time.timeScale = 1f;
+			Phase = victory ? DungeonPhase.Victory : DungeonPhase.Defeat;
+			if (victory)
+			{
+				NewBestTime = Session.CompleteRun(RunTime);
+				EngineLog.Info(Log, $"Dungeon cleared in {RunTime:0.0}s.");
+			}
+			else
+			{
+				var marker = PlayerHealth.GetComponent<AiTarget>();
+				if (marker != null) marker.Alive = false;
+			}
 			Save();
 			StopPlay();
-			EngineLog.Info(Log, $"Dungeon cleared in {RunTime:0.0}s.");
 		}
 
 		void OnPlayerDied(Health health, DamageInfo info)
 		{
 			if (Phase != DungeonPhase.Playing) return;
-			Phase = DungeonPhase.Defeat;
 			var marker = health.GetComponent<AiTarget>();
 			if (marker != null) marker.Alive = false;
-			Save();
-			StopPlay();
+			if (Net != null)
+			{
+				GoDown(health);
+				return;
+			}
+			EndRun(false);
+		}
+
+		// Online: a fallen hero stays where it fell and looks around; the others fight on.
+		void GoDown(Health health)
+		{
+			LocalDown = true;
+			var controls = health.GetComponent<CharacterViewControls>();
+			var motor = health.GetComponent<CharacterMotor>();
+			if (controls != null) controls.enabled = false;
+			if (motor != null) motor.SetCommand(new CharacterCommand { Yaw = motor.Yaw });
+			var body = health.transform.Find("Body");
+			if (body != null) body.localRotation = Quaternion.Euler(-80f, 0f, 0f);
+			ShowToast("You have fallen. Your allies fight on.");
 		}
 
 		void StopPlay()
@@ -192,6 +290,7 @@ namespace Temnorid.Dungeons
 		/// <summary>Starts the dungeon again from the entrance.</summary>
 		public void Retry()
 		{
+			if (Net != null) return; // the others cannot follow a reload: leave and host again
 			Time.timeScale = 1f;
 			EngineInput.Default.PlayerEnabled = true;
 			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

@@ -13,6 +13,12 @@ namespace Temnorid.Dungeons
 		public string ItemId;
 		public int Quantity;
 
+		/// <summary>Same on every machine for the same pickup, set when playing online. Zero offline.</summary>
+		public int NetId;
+
+		/// <summary>True on a client: only shown, the host decides who picks it up.</summary>
+		public bool Proxy;
+
 		float _phase;
 
 		/// <summary>Drops an item on the floor at <paramref name="position"/>.</summary>
@@ -36,6 +42,9 @@ namespace Temnorid.Dungeons
 			_phase += Time.deltaTime;
 			transform.rotation = Quaternion.Euler(30f, _phase * 120f, 0f);
 			transform.position = new Vector3(transform.position.x, 0.6f + Mathf.Sin(_phase * 3f) * 0.12f, transform.position.z);
+
+			// Online, the host checks every hero (DungeonNet); a client only shows the pickup.
+			if (Proxy || DungeonNet.Active != null) return;
 
 			var game = DungeonGame.Instance;
 			if (game == null || game.PlayerHealth == null || !game.PlayerHealth.IsAlive) return;

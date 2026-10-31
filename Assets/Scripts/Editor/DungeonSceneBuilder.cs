@@ -5,6 +5,7 @@ using ITKamianets.Engine.AI;
 using ITKamianets.Engine.Character;
 using ITKamianets.Engine.CharacterView;
 using ITKamianets.Engine.Combat;
+using ITKamianets.Engine.Shell.Editor;
 using Unity.AI.Navigation;
 using UnityEditor;
 using UnityEditor.Build;
@@ -25,15 +26,14 @@ namespace Temnorid.Dungeons.EditorTools
 	public static class DungeonSceneBuilder
 	{
 		const string ScenePath = "Assets/Scenes/Main.unity";
+		public const string Version = "0.2.0";
 		const string MaterialDir = "Assets/Materials";
 		const float WallHeight = 4f;
 
 		[MenuItem("Temnorid/Dungeons/Build Scene")]
 		public static void Build()
 		{
-			PlayerSettings.productName = "Temnorid Dungeons";
-			PlayerSettings.companyName = "Temnorid";
-			PlayerSettings.bundleVersion = "0.1.0";
+			ShellSceneKit.ApplyPlatformSettings("Temnorid", "Temnorid Dungeons", "com.itkamianets.dungeons", Version);
 			PlayerSettings.SetApplicationIdentifier(NamedBuildTarget.Standalone, "com.itkamianets.dungeons");
 			PlayerSettings.runInBackground = true;
 			PlayerSettings.fullScreenMode = FullScreenMode.FullScreenWindow;
@@ -66,9 +66,13 @@ namespace Temnorid.Dungeons.EditorTools
 			hud.Fighter = player.GetComponent<PlayerFighter>();
 
 			EditorSceneManager.SaveScene(scene, ScenePath);
-			EditorBuildSettings.scenes = new[] { new EditorBuildSettingsScene(ScenePath, true) };
+			var dungeonName = dungeon.name;
+			var monsterCount = monsters.Length;
+			ShellSceneKit.BuildBoot();
+			ShellSceneKit.BuildMenu();
+			ShellSceneKit.SetBuildOrder(ScenePath);
 			AssetDatabase.SaveAssets();
-			Debug.Log("[Dungeons] Scene built: " + ScenePath + " (" + dungeon.name + ", " + monsters.Length + " monsters)");
+			Debug.Log("[Dungeons] Scene built: " + ScenePath + " (" + dungeonName + ", " + monsterCount + " monsters)");
 		}
 
 		// ---- the level ----

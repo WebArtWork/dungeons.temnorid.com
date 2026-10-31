@@ -4,7 +4,7 @@
 ; The installer is written to Builds\Installer.
 
 #define AppName "Temnorid Dungeons"
-#define AppVersion "0.1.0"
+#define AppVersion "0.2.0"
 #define AppExe "TemnoridDungeons.exe"
 
 [Setup]
@@ -37,4 +37,5 @@ Name: "{autodesktop}\{#AppName}"; Filename: "{app}\{#AppExe}"; Tasks: desktopico
 Name: "desktopicon"; Description: "Create a desktop shortcut"; GroupDescription: "Additional shortcuts:"
 
 [Run]
-Filename: "{app}\{#AppExe}"; Description: "Start {#AppName}"; Flags: nowait postinstall skipifsilent
+; No skipifsilent: when the game updates itself the installer runs silently and must start the game again.
+Filename: "{app}\{#AppExe}"; Description: "Start {#AppName}"; Flags: nowait postinstall

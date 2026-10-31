@@ -58,8 +58,8 @@ PlayerSettings:
   iosShowActivityIndicatorOnLoading: -1
   androidShowActivityIndicatorOnLoading: -1
   iosUseCustomAppBackgroundBehavior: 0
-  allowedAutorotateToPortrait: 1
-  allowedAutorotateToPortraitUpsideDown: 1
+  allowedAutorotateToPortrait: 0
+  allowedAutorotateToPortraitUpsideDown: 0
   allowedAutorotateToLandscapeRight: 1
   allowedAutorotateToLandscapeLeft: 1
   useOSAutorotation: 1
@@ -149,7 +149,7 @@ PlayerSettings:
   loadStoreDebugModeEnabled: 0
   visionOSBundleVersion: 1.0
   tvOSBundleVersion: 1.0
-  bundleVersion: 0.1.0
+  bundleVersion: 0.2.0
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -170,16 +170,16 @@ PlayerSettings:
   androidMaxAspectRatio: 2.4
   androidMinAspectRatio: 1
   applicationIdentifier:
-    Android: com.itkamianets.characterview
+    Android: com.itkamianets.dungeons
     Standalone: com.itkamianets.dungeons
-    iPhone: com.itkamianets.characterview
+    iPhone: com.itkamianets.dungeons
   buildNumber:
     Standalone: 0
     VisionOS: 0
-    iPhone: 0
+    iPhone: 200
     tvOS: 0
   overrideDefaultApplicationIdentifier: 1
-  AndroidBundleVersionCode: 1
+  AndroidBundleVersionCode: 200
   AndroidMinSdkVersion: 26
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 1
@@ -188,7 +188,7 @@ PlayerSettings:
   stripEngineCode: 1
   iPhoneStrippingLevel: 0
   iPhoneScriptCallOptimization: 0
-  ForceInternetPermission: 0
+  ForceInternetPermission: 1
   ForceSDCardPermission: 0
   CreateWallpaper: 0
   androidSplitApplicationBinary: 0
@@ -839,6 +839,7 @@ PlayerSettings:
   platformArchitecture: {}
   scriptingBackend:
     Android: 1
+    iPhone: 1
   il2cppCompilerConfiguration: {}
   il2cppCodeGeneration: {}
   il2cppLTOMode: {}
