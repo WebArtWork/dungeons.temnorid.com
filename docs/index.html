@@ -4,57 +4,95 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Temnorid Dungeons</title>
-	<meta name="description" content="Temnorid Dungeons: Explore dangerous ruins, fight monsters, defeat bosses and find rare treasure. Win gear and magical artefacts for your heroes.">
+	<meta name="description" content="Explore ruins, fight monsters and defeat the boss in Temnorid Dungeons. Collect gold and artefacts, solo or with up to three friends on Windows.">
 	<link rel="canonical" href="https://dungeons.temnorid.com/">
+	<link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48">
+	<link rel="icon" type="image/png" href="/favicon.png" sizes="48x48">
+	<link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any">
+	<link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
 	<meta property="og:type" content="website">
+	<meta property="og:site_name" content="Temnorid Dungeons">
 	<meta property="og:title" content="Temnorid Dungeons">
-	<meta property="og:description" content="Adventures, dungeons and the hunt for artefacts. Clear the ruins. Beat the boss. Keep the loot.">
+	<meta property="og:description" content="Explore ruins, fight monsters and defeat the boss in Temnorid Dungeons. Collect gold and artefacts, solo or with up to three friends on Windows.">
 	<meta property="og:url" content="https://dungeons.temnorid.com/">
+	<meta property="og:locale" content="en_US">
+	<meta property="og:image" content="https://dungeons.temnorid.com/seo-image.png">
+	<meta property="og:image:type" content="image/png">
+	<meta property="og:image:width" content="1200">
+	<meta property="og:image:height" content="630">
+	<meta property="og:image:alt" content="Temnorid Dungeons — Clear the ruins · Claim the loot">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="Temnorid Dungeons">
+	<meta name="twitter:description" content="Explore ruins, fight monsters and defeat the boss in Temnorid Dungeons. Collect gold and artefacts, solo or with up to three friends on Windows.">
+	<meta name="twitter:image" content="https://dungeons.temnorid.com/seo-image.png">
+	<meta name="twitter:image:alt" content="Temnorid Dungeons — Clear the ruins · Claim the loot">
 	<meta name="theme-color" content="#0f0d14">
-	<style>
-		:root { --accent: #8a6fd6; --bg: #0f0d14; --panel: #1a1722; --line: #2d2838; --text: #e9e6f0; --muted: #a9a3b8; }
-		* { box-sizing: border-box; }
-		html { scroll-behavior: smooth; }
-		body { margin: 0; background: var(--bg); color: var(--text); font: 17px/1.65 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
-		a { color: var(--accent); }
-		.wrap { max-width: 880px; margin: 0 auto; padding: 0 20px; }
-		header.site { border-bottom: 1px solid var(--line); }
-		header.site .wrap { display: flex; align-items: center; justify-content: space-between; padding-top: 14px; padding-bottom: 14px; }
-		.brand { font-weight: 700; color: var(--text); text-decoration: none; letter-spacing: .02em; }
-		nav a { margin-left: 18px; color: var(--muted); text-decoration: none; font-size: 15px; }
-		nav a:hover { color: var(--text); }
-		.hero { padding: 72px 0 56px; border-bottom: 1px solid var(--line); background: radial-gradient(900px 300px at 50% -10%, color-mix(in srgb, var(--accent) 22%, transparent), transparent); }
-		.eyebrow { color: var(--accent); font-weight: 700; letter-spacing: .12em; text-transform: uppercase; font-size: 13px; margin: 0 0 10px; }
-		h1 { font-size: clamp(36px, 7vw, 60px); line-height: 1.08; margin: 0 0 12px; }
-		.tagline { font-size: 22px; color: var(--text); margin: 0 0 18px; }
-		.lead { color: var(--muted); max-width: 640px; margin: 0 0 28px; }
-		.btn { display: inline-block; background: var(--accent); color: #111; font-weight: 700; padding: 13px 24px; border-radius: 10px; text-decoration: none; }
-		.btn:hover { filter: brightness(1.1); }
-		.fine { color: var(--muted); font-size: 14px; margin: 14px 0 0; }
-		section { padding: 48px 0; border-bottom: 1px solid var(--line); }
-		h2 { font-size: 28px; margin: 0 0 16px; }
-		h3 { font-size: 18px; margin: 28px 0 8px; }
-		p { margin: 0 0 14px; }
-		ol, ul { padding-left: 22px; margin: 0 0 14px; }
-		li { margin-bottom: 8px; }
-		table { width: 100%; border-collapse: collapse; background: var(--panel); border-radius: 10px; overflow: hidden; }
-		th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); }
-		th { color: var(--muted); font-weight: 600; font-size: 14px; }
-		tr:last-child td { border-bottom: 0; }
-		td:first-child { white-space: nowrap; font-weight: 600; }
-		.cards { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
-		.card { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 18px; }
-		.card h3 { margin-top: 0; }
-		.note { background: var(--panel); border-left: 3px solid var(--accent); padding: 14px 16px; border-radius: 6px; color: var(--muted); }
-		footer { padding: 32px 0 56px; color: var(--muted); font-size: 14px; }
-		:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-		@media (max-width: 560px) { nav a:not(:last-child) { display: none; } }
-	</style>
+	<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://dungeons.temnorid.com/#website",
+      "name": "Temnorid Dungeons",
+      "url": "https://dungeons.temnorid.com/",
+      "inLanguage": "en",
+      "image": "https://dungeons.temnorid.com/seo-image.png",
+      "about": {
+        "@id": "https://dungeons.temnorid.com/#game"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://dungeons.temnorid.com/#webpage",
+      "name": "Temnorid Dungeons",
+      "url": "https://dungeons.temnorid.com/",
+      "description": "Explore ruins, fight monsters and defeat the boss in Temnorid Dungeons. Collect gold and artefacts, solo or with up to three friends on Windows.",
+      "isPartOf": {
+        "@id": "https://dungeons.temnorid.com/#website"
+      },
+      "about": {
+        "@id": "https://dungeons.temnorid.com/#game"
+      },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://dungeons.temnorid.com/seo-image.png",
+        "width": 1200,
+        "height": 630
+      }
+    },
+    {
+      "@type": "VideoGame",
+      "@id": "https://dungeons.temnorid.com/#game",
+      "name": "Temnorid Dungeons",
+      "url": "https://dungeons.temnorid.com/",
+      "description": "Explore ruins, fight monsters and defeat the boss in Temnorid Dungeons. Collect gold and artefacts, solo or with up to three friends on Windows.",
+      "image": "https://dungeons.temnorid.com/seo-image.png",
+      "thumbnailUrl": "https://dungeons.temnorid.com/logo.png",
+      "genre": "Action RPG",
+      "gamePlatform": "Windows",
+      "operatingSystem": "Windows 10 or later, 64-bit",
+      "softwareVersion": "0.1.0",
+      "downloadUrl": "https://github.com/WebArtWork/dungeons.temnorid.com/releases/latest/download/Temnorid-Dungeons-Setup.exe",
+      "releaseNotes": "https://github.com/WebArtWork/dungeons.temnorid.com/releases/tag/v0.1.0",
+      "isAccessibleForFree": true,
+      "inLanguage": "en",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Temnorid",
+        "url": "https://temnorid.com/"
+      }
+    }
+  ]
+}
+</script>
+	<link rel="stylesheet" href="./site.css">
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 	<header class="site">
 		<div class="wrap">
-			<a class="brand" href="./">Temnorid Dungeons</a>
+			<a class="brand" href="./"><img src="./logo.svg" alt="" width="44" height="44">Temnorid Dungeons</a>
 			<nav aria-label="Main">
 				<a href="#play">How to play</a>
 				<a href="#together">With others</a>
@@ -64,29 +102,22 @@
 		</div>
 	</header>
 
-	<main>
-		<div class="hero">
-			<div class="wrap">
-				<p class="eyebrow">A Temnorid game · Windows · Android · iOS · in development</p>
+	<main id="main" tabindex="-1">
+		<div class="hero"><div class="wrap hero-grid"><div class="hero-copy">
+				<p class="eyebrow">Dungeon adventures</p>
 				<h1>Temnorid Dungeons</h1>
 				<p class="tagline">Clear the ruins. Beat the boss. Keep the loot.</p>
-				<p class="lead">Adventures, dungeons and the hunt for artefacts.</p>
+				<p class="lead">Fight through the ruins, defeat the boss and claim its treasure.</p>
 				<a class="btn" href="https://github.com/WebArtWork/dungeons.temnorid.com/releases/latest/download/Temnorid-Dungeons-Setup.exe">Download for Windows</a>
-				<p class="fine">Free · Windows 10 or later · installer · version 0.2.0 · updates itself. Co-op for up to four; Android and iOS builds are made from the same project.</p>
-			</div>
-		</div>
+				<p class="fine">Free · Windows 10 or later, 64-bit<br>In development</p>
+			</div><figure class="brand-art"><img src="./logo.svg" alt="" width="1024" height="1024"><figcaption>Clear the ruins · Claim the loot</figcaption></figure></div></div>
 
-		<section id="about">
-			<div class="wrap">
-				<h2>About the game</h2>
+		<section id="about" aria-labelledby="about-title"><div class="wrap section-grid"><div class="section-intro"><h2 id="about-title">About the game</h2></div><div class="section-body"><p>Adventures, dungeons and the hunt for artefacts.</p>
 				<p>Explore dangerous ruins, fight monsters, defeat bosses and find rare treasure. Win gear and magical artefacts for your heroes.</p>
 				<p class="note">Graphics are simple placeholder shapes for now. The game is built to be played first and polished later.</p>
-			</div>
-		</section>
+			</div></div></section>
 
-		<section id="play">
-			<div class="wrap">
-				<h2>How to play</h2>
+		<section id="play" aria-labelledby="play-title"><div class="wrap section-grid"><div class="section-intro"><h2 id="play-title">How to play</h2></div><div class="section-body">
 				<p>The first playable is one compact dungeon: fight through a few monsters, face a boss with a visible attack warning, and take the treasure it guards.</p>
 				<ol>
 					<li>Enter the dungeon with a sword and one special ability, the shockwave.</li>
@@ -100,35 +131,23 @@
 					<div class="card"><h3>You win</h3><p>Defeat the boss, collect the loot and leave through the exit.</p></div>
 					<div class="card"><h3>You lose</h3><p>If your health reaches zero the run ends. Retry restarts the dungeon.</p></div>
 				</div>
-			</div>
-		</section>
+			</div></div></section>
 
-		<section id="together">
-			<div class="wrap">
-				<h2>Playing with others</h2>
+		<section id="together" aria-labelledby="together-title"><div class="wrap section-grid"><div class="section-intro"><h2 id="together-title">Playing with others</h2></div><div class="section-body">
 				<p>Up to four heroes can fight through the same dungeon. On the first screen choose <strong>Play with others</strong>, then host a game (friends on the same network type the address it shows, or use a short code when hosting online), press Ready and the host starts. Monsters get 50% more health for each extra hero; a single hero is unchanged. Each hero keeps its own loot: drops go to the hero that walks over them, and everybody opens the chest for their own stash. A fallen hero stays down and watches the others, and the run is lost if everybody falls. Once the boss is beaten, the run is won when the living heroes have left through the exit, or 45 seconds after the first one did. If the host leaves, the game ends for everybody.</p>
-			</div>
-		</section>
+			</div></div></section>
 
-		<section id="phones">
-			<div class="wrap">
-				<h2>Phones</h2>
+		<section id="phones" aria-labelledby="phones-title"><div class="wrap section-grid"><div class="section-intro"><h2 id="phones-title">Phones</h2></div><div class="section-body">
 				<p>Android and iOS builds come from the same project. On a phone there is a stick on the left to move, a drag anywhere else to look, and buttons on the right: Attack, Wave (the shockwave), Jump, Use (open the chest) and Run. The places (Dungeon, Hero, Profile) are the tabs along the bottom.</p>
-			</div>
-		</section>
+			</div></div></section>
 
-		<section id="updates">
-			<div class="wrap">
-				<h2>Updates</h2>
+		<section id="updates" aria-labelledby="updates-title"><div class="wrap section-grid"><div class="section-intro"><h2 id="updates-title">Updates</h2></div><div class="section-body">
 				<p>When a newer release is published on GitHub, the Windows game downloads and installs it by itself the next time it starts, and starts again. You can turn this off in <strong>Profile</strong>. On Android and iOS the update comes from the store or the release page.</p>
-			</div>
-		</section>
+			</div></div></section>
 
-		<section id="controls">
-			<div class="wrap">
-				<h2>Controls</h2>
+		<section id="controls" aria-labelledby="controls-title"><div class="wrap section-grid"><div class="section-intro"><h2 id="controls-title">Controls</h2></div><div class="section-body">
 				<table>
-					<thead><tr><th>Key</th><th>Action</th></tr></thead>
+					<thead><tr><th scope="col">Key</th><th scope="col">Action</th></tr></thead>
 					<tbody>
 						<tr><td>W A S D</td><td>Move</td></tr>
 						<tr><td>Mouse</td><td>Look around</td></tr>
@@ -141,35 +160,28 @@
 					</tbody>
 				</table>
 				<p class="fine">Keyboard and mouse on a PC, touch on a phone. Your progress is saved on your device.</p>
-			</div>
-		</section>
+			</div></div></section>
 
-		<section id="lords">
-			<div class="wrap">
-				<h2>Part of the world of Temnorid</h2>
+		<section id="lords" aria-labelledby="lords-title"><div class="wrap section-grid"><div class="section-intro"><h2 id="lords-title">Part of the world of Temnorid</h2></div><div class="section-body">
 				<p>Gear and magical artefacts found here will go to the heroes of Lords, which already send heroes into dungeons for loot.</p>
 				<p>Today Temnorid Dungeons is a separate game and does not talk to Lords. The first screen offers sign-in with Google, a guest account or playing offline; none is needed to play, and playing alone needs no internet connection. A connection is needed only for playing with others and for updates. Your stash and records are saved on your device.</p>
-			</div>
-		</section>
+			</div></div></section>
 
-		<section id="download">
-			<div class="wrap">
-				<h2>Download</h2>
-				<p><a class="btn" href="https://github.com/WebArtWork/dungeons.temnorid.com/releases/latest/download/Temnorid-Dungeons-Setup.exe">Download Temnorid-Dungeons-Setup.exe</a></p>
+		<section id="download" aria-labelledby="download-title"><div class="wrap section-grid"><div class="section-intro"><h2 id="download-title">Download</h2></div><div class="section-body"><p class="release-status">Latest published installer: <a href="https://github.com/WebArtWork/dungeons.temnorid.com/releases/tag/v0.1.0">0.1.0</a>. Development version: 0.2.0. This page describes the development version; some features are not in the published installer yet.</p><p class="release-meta">A Temnorid game · Windows · Android · iOS · in development</p><p class="fine">Free · Windows 10 or later · installer · version 0.2.0 · updates itself. Co-op for up to four; Android and iOS builds are made from the same project.</p>
+				<p><a class="btn" href="https://github.com/WebArtWork/dungeons.temnorid.com/releases/latest/download/Temnorid-Dungeons-Setup.exe">Download for Windows</a></p>
 				<ol>
 					<li>Download the installer and run it.</li>
 					<li>Windows may warn about an unknown publisher, because the installer is not signed yet. Choose <strong>More info</strong>, then <strong>Run anyway</strong>.</li>
 					<li>Start Temnorid Dungeons from the Start menu.</li>
 				</ol>
 				<p class="fine">Requires Windows 10 or later, 64-bit. All releases and release notes: <a href="https://github.com/WebArtWork/dungeons.temnorid.com/releases">GitHub Releases</a>.</p>
-			</div>
-		</section>
+			</div></div></section>
 	</main>
 
 	<footer>
 		<div class="wrap">
 			<p>Temnorid Dungeons is a <a href="https://temnorid.com">Temnorid</a> game, made with the <a href="https://3d.itkamianets.com">IT Kamianets 3D Engine</a>. <a href="https://github.com/WebArtWork/dungeons.temnorid.com">Source and feedback</a>.</p>
-		</div>
+		<a class="back-top" href="#main">Back to top</a></div>
 	</footer>
 </body>
 </html>

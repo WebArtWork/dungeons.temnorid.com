@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+ <rect width="1200" height="630" fill="#0f0d14"/><path d="M0 6H1200" stroke="#8a6fd6" stroke-width="12"/>
+ <g font-family="Segoe UI, Arial, sans-serif" fill="#e9e6f0">
+ <text x="72" y="105" font-size="26" font-weight="700" letter-spacing="5">TEMNORID</text>
+ <text x="72" y="151" font-size="24" fill="#b6a6e6">Dungeon adventures</text>
+ <text x="72" y="285" font-size="96" font-weight="700" letter-spacing="-3">Dungeons</text>
+ <text x="74" y="438" font-size="29" fill="#b6a6e6">Clear the ruins · Claim the loot</text>
+ <path d="M72 514H1128" stroke="#2d2838" stroke-width="2"/>
+ <text x="72" y="566" font-size="24" fill="#a9a3b8">dungeons.temnorid.com</text>
+ <text x="1128" y="566" font-size="24" text-anchor="end" fill="#a9a3b8">A Temnorid game</text>
+ </g><g transform="translate(800 148) scale(2.35)"><path d="M24 111V53C24 31 42 15 64 15S104 31 104 53V111H87V54C87 41 77 31 64 31S41 41 41 54V111Z" fill="#8a6fd6"/><path d="M64 15V31M27 39 42 45M101 39 86 45M24 70H41M87 70H104M24 94H41M87 94H104" stroke="#1a1722" stroke-width="4"/><path d="M64 53 82 74 64 101 46 74Z" fill="#b6a6e6"/><path d="M64 53V101L82 74Z" fill="#8a6fd6"/></g></svg>
