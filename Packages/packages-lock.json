@@ -32,7 +32,7 @@
         "com.unity.modules.unitywebrequest": "1.0.0",
         "com.unity.modules.jsonserialize": "1.0.0"
       },
-      "hash": "eebaadbbfaf1fb15c80ec122fc7bbb724c9b2248"
+      "hash": "0ac0681cdbfd3a6be9d5164193fce87765949a51"
     },
     "com.itkamianets.3d-unity-ai": {
       "version": "https://github.com/IT-Kamianets/3d-unity-ai.git",
@@ -133,7 +133,7 @@
         "com.unity.ugui": "2.6.0",
         "com.unity.inputsystem": "1.20.0"
       },
-      "hash": "a6cdbbd023287014769de7080f08cd6da6400fda"
+      "hash": "8d7f460deeff2b81e1aa19e264696b3bec379f0b"
     },
     "com.itkamianets.3d-unity-ui": {
       "version": "https://github.com/IT-Kamianets/3d-unity-ui.git",

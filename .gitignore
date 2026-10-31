@@ -118,3 +118,6 @@ desktop.ini
 /Packages/*
 !/Packages/manifest.json
 !/Packages/packages-lock.json
+
+# Google sign-in client for this machine (see 3d-unity-account); never committed
+/Assets/Resources/account-oauth.json*
