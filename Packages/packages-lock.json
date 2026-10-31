@@ -24,6 +24,16 @@
       },
       "hash": "51ca9abf707f796748c684b83336e1be9bcb4d8d"
     },
+    "com.itkamianets.3d-unity-account": {
+      "version": "https://github.com/IT-Kamianets/3d-unity-account.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.modules.unitywebrequest": "1.0.0",
+        "com.unity.modules.jsonserialize": "1.0.0"
+      },
+      "hash": "eebaadbbfaf1fb15c80ec122fc7bbb724c9b2248"
+    },
     "com.itkamianets.3d-unity-ai": {
       "version": "https://github.com/IT-Kamianets/3d-unity-ai.git",
       "depth": 0,
