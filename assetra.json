@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "1.0.0",
+  "libraryId": "dungeons-temnorid",
+  "units": "meters",
+  "metadata": {
+    "tags": [
+      "assetra"
+    ],
+    "properties": {
+      "assetra": {
+        "format": 1,
+        "project": "dungeons-temnorid",
+        "name": "Temnorid Dungeons",
+        "modelsDir": "Assets/Models"
+      }
+    }
+  },
+  "assets": []
+}

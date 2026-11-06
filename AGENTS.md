@@ -73,6 +73,24 @@ Merge these into `dependencies` in `Packages/manifest.json`. Unity installs each
 - Scenes, prefabs that wire packages together, and build settings stay in this project; reusable code goes into packages.
 - Rewrite `README.md` for the game and this file's first paragraph once the game has a name: what it is, its packages, how to play.
 
+## Models and Assetra (`assetra.json`)
+
+`assetra.json` in the repository root lists every model the game needs. It is a valid
+[3d-asset-schema](https://3d.itkamianets.com/packages/3d-asset-schema) library (`schemaVersion`,
+`libraryId`, `units`, `assets`), so the same file works for the engine and for Assetra
+(assetra.itkamianets.com, a separate tool by another developer; following this file is optional).
+
+- **This project owns the list.** One asset per model: `id` (path-like, for example `props/bench`), `name`,
+  `kind: "model"`, `bounds` (the size the game uses), `placeholder` (shape and color shown until the
+  model exists) and `metadata` (tags, pivot, triangle budget).
+- **Empty or filled.** An asset without `source` is a placeholder waiting for a model. An asset with
+  `source` (`uri` relative to this file, `format: "glb"`) is filled.
+- **Adding a model:** put the GLB under `Assets/Models/`, add or update its entry in `assetra.json`, and the
+  next Assetra sync publishes it. Never delete an entry just because its file is missing: ask first.
+- **Sync** (`3d-unity-assetra`) pushes this list to the Assetra project `dungeons-temnorid` and pulls the models
+  that were filled there into the `source` path. The developer decides what is in the list; sync never
+  removes entries or overwrites files on its own.
+- Model rules: GLB, meters, +Y up, +Z front, bottom-center pivot.
 ## Rules
 
 - **Read input only through `3d-unity-input`.** Never read devices directly.
