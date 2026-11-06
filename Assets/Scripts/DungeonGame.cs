@@ -81,6 +81,7 @@ namespace Temnorid.Dungeons
 			_store = new DungeonSaveStore(SaveRootOverride);
 			Session.Load(_store.Load());
 			Session.StartRun();
+			ApplyDungeon(DungeonSelection.Current);
 
 			// The monsters wait, switched off, until the floor exists to walk on.
 			Surface.BuildNavMesh();
@@ -89,6 +90,28 @@ namespace Temnorid.Dungeons
 			if (NetSession.Instance.IsOnline) Net = gameObject.AddComponent<DungeonNet>().Init(this);
 
 			PlayerHealth.Died += OnPlayerDied;
+		}
+
+		/// <summary>The dungeon the hero was sent to: the same halls, but the monsters hit harder and last longer the deeper the dungeon (danger 1 to 3).</summary>
+		void ApplyDungeon(Temnorid.Village.DungeonDef dungeon)
+		{
+			var health = 1f + 0.5f * (dungeon.Danger - 1);
+			var damage = 1f + 0.3f * (dungeon.Danger - 1);
+			var done = new System.Collections.Generic.HashSet<Monster>();
+			var all = new System.Collections.Generic.List<Monster>(StartingMonsters);
+			if (Boss != null) all.Add(Boss);
+			foreach (var monster in all)
+			{
+				if (monster == null || !done.Add(monster)) continue;
+				var life = monster.GetComponent<Health>();
+				if (life != null)
+				{
+					life.MaxHealth = life.MaxHealth * health;
+					life.Restore();
+				}
+				monster.MeleeDamage *= damage;
+				monster.SlamDamage *= damage;
+			}
 		}
 
 		void OnEnable() => Monster.Killed += OnMonsterKilled;
@@ -133,6 +156,15 @@ namespace Temnorid.Dungeons
 			var hold = Paused || UiHold;
 			Time.timeScale = hold && Net == null ? 0f : 1f;
 			EngineInput.Default.PlayerEnabled = !hold;
+		}
+
+		/// <summary>Saves, then goes back to the arena. The hero's trip has already been ended in Lords (see <see cref="EndRun"/>).</summary>
+		public void ReturnToArena()
+		{
+			Save();
+			Time.timeScale = 1f;
+			EngineInput.Default.PlayerEnabled = true;
+			SceneManager.LoadScene(HubGame.HubScene);
 		}
 
 		/// <summary>Saves, then leaves for the landing screen (closing any online game).</summary>
@@ -254,6 +286,8 @@ namespace Temnorid.Dungeons
 			}
 			Save();
 			StopPlay();
+			// The trip ends in Lords too: the hero is back with the loot, or, if it fell here, in the infirmary.
+			if (Net == null) HeroLink.Pending = HeroLink.Current.EndTripAsync(!victory);
 		}
 
 		void OnPlayerDied(Health health, DamageInfo info)

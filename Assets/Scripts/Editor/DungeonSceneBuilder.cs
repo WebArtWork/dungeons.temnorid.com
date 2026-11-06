@@ -25,7 +25,10 @@ namespace Temnorid.Dungeons.EditorTools
 	/// </summary>
 	public static class DungeonSceneBuilder
 	{
-		const string ScenePath = "Assets/Scenes/Main.unity";
+		/// <summary>The dungeon itself: the hero is sent here from the arena.</summary>
+		const string ScenePath = "Assets/Scenes/Dungeon.unity";
+		/// <summary>The lord's arena with the dungeon board: where the game opens.</summary>
+		const string HubPath = "Assets/Scenes/Main.unity";
 		public const string Version = "0.2.0";
 		const string MaterialDir = "Assets/Materials";
 		const float WallHeight = 4f;
@@ -47,8 +50,8 @@ namespace Temnorid.Dungeons.EditorTools
 			var monsters = BuildMonsters(out var boss);
 			var chest = BuildChest();
 			var exit = BuildExit();
-			var player = BuildPlayer();
-			BuildCameraAndLights(player.GetComponent<CharacterMotor>());
+			var player = BuildPlayer(false);
+			BuildCameraAndLights(player.GetComponent<CharacterMotor>(), true);
 
 			var gameObject = new GameObject("Game");
 			var game = gameObject.AddComponent<DungeonGame>();
@@ -70,9 +73,28 @@ namespace Temnorid.Dungeons.EditorTools
 			var monsterCount = monsters.Length;
 			ShellSceneKit.BuildBoot();
 			ShellSceneKit.BuildMenu();
-			ShellSceneKit.SetBuildOrder(ScenePath);
+			BuildHub();
+			ShellSceneKit.SetBuildOrder(HubPath, ScenePath);
 			AssetDatabase.SaveAssets();
-			Debug.Log("[Dungeons] Scene built: " + ScenePath + " (" + dungeonName + ", " + monsterCount + " monsters)");
+			Debug.Log("[Dungeons] Scenes built: " + HubPath + ", " + ScenePath + " (" + dungeonName + ", " + monsterCount + " monsters)");
+		}
+
+		/// <summary>The arena scene: the courtyard and the board are made when the game starts, by <see cref="HubGame"/> (the courtyard is the village's, common to every game).</summary>
+		static void BuildHub()
+		{
+			var scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
+			RenderSettings.ambientMode = UnityEngine.Rendering.AmbientMode.Flat;
+			RenderSettings.ambientLight = new Color(0.52f, 0.53f, 0.62f);
+
+			var player = BuildPlayer(true);
+			BuildCameraAndLights(player.GetComponent<CharacterMotor>(), false);
+
+			var font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+			var game = new GameObject("Game").AddComponent<HubGame>();
+			game.Lit = Mat("ArenaLit", Color.white);
+			game.TextMaterial = GrayboxBuilder.WorldTextMaterial(font, MaterialDir);
+			game.Player = player.transform;
+			EditorSceneManager.SaveScene(scene, HubPath);
 		}
 
 		// ---- the level ----
@@ -327,7 +349,7 @@ namespace Temnorid.Dungeons.EditorTools
 			return exit;
 		}
 
-		static GameObject BuildPlayer()
+		static GameObject BuildPlayer(bool hub)
 		{
 			var blue = Mat("HeroBlue", new Color(0.2f, 0.45f, 0.9f));
 			var skin = Mat("Skin", new Color(0.88f, 0.7f, 0.55f));
@@ -340,13 +362,16 @@ namespace Temnorid.Dungeons.EditorTools
 			player.AddComponent<CharacterMotor>();
 			player.AddComponent<CharacterViewControls>();
 
-			var life = player.AddComponent<Health>();
-			life.MaxHealth = 180f;
-			life.Team = 1;
-			life.Restore();
-			var marker = player.AddComponent<AiTarget>();
-			marker.Team = 1;
-			player.AddComponent<PlayerFighter>();
+			if (!hub)
+			{
+				var life = player.AddComponent<Health>();
+				life.MaxHealth = 180f;
+				life.Team = 1;
+				life.Restore();
+				var marker = player.AddComponent<AiTarget>();
+				marker.Team = 1;
+				player.AddComponent<PlayerFighter>();
+			}
 			player.AddComponent<AssetIdTag>().Id = "characters/hero";
 
 			var body = new GameObject("Body").transform;
@@ -359,7 +384,7 @@ namespace Temnorid.Dungeons.EditorTools
 			return player;
 		}
 
-		static void BuildCameraAndLights(CharacterMotor target)
+		static void BuildCameraAndLights(CharacterMotor target, bool torchLit)
 		{
 			var cameraObject = new GameObject("Main Camera") { tag = "MainCamera" };
 			var camera = cameraObject.AddComponent<Camera>();
@@ -381,9 +406,11 @@ namespace Temnorid.Dungeons.EditorTools
 			sun.transform.rotation = Quaternion.Euler(60f, -20f, 0f);
 			var directional = sun.AddComponent<Light>();
 			directional.type = LightType.Directional;
-			directional.intensity = 0.35f;
+			directional.intensity = torchLit ? 0.35f : 0.9f;
 			directional.color = new Color(0.7f, 0.75f, 1f);
 			directional.shadows = LightShadows.None;
+
+			if (!torchLit) return;
 
 			// Torches: warm lights in every room and corridor.
 			var torches = new[]

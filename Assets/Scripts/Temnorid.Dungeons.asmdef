@@ -18,6 +18,8 @@
     "ITKamianets.Engine.CharacterView.Controls",
     "ITKamianets.Engine.Shell",
     "ITKamianets.Engine.Net",
+    "ITKamianets.Engine.Account",
+    "Temnorid.Village",
     "ITKamianets.Engine.Update"
   ],
   "includePlatforms": [],

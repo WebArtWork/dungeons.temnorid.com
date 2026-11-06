@@ -30,9 +30,10 @@
       "source": "git",
       "dependencies": {
         "com.unity.modules.unitywebrequest": "1.0.0",
-        "com.unity.modules.jsonserialize": "1.0.0"
+        "com.unity.modules.jsonserialize": "1.0.0",
+        "com.unity.nuget.newtonsoft-json": "3.2.2"
       },
-      "hash": "0ac0681cdbfd3a6be9d5164193fce87765949a51"
+      "hash": "87b7263e6315d169f45fbc7f02b98b23608e2c07"
     },
     "com.itkamianets.3d-unity-ai": {
       "version": "https://github.com/IT-Kamianets/3d-unity-ai.git",
@@ -53,7 +54,7 @@
         "com.unity.modules.physics": "1.0.0",
         "com.unity.modules.animation": "1.0.0"
       },
-      "hash": "d7a3f6bd49e72549b6a4457aca9d52bfbff01c6b"
+      "hash": "f4ce7f4ce79b6e1642deb1cbb0df3f9586d00b80"
     },
     "com.itkamianets.3d-unity-combat": {
       "version": "https://github.com/IT-Kamianets/3d-unity-combat.git",
@@ -62,7 +63,7 @@
       "dependencies": {
         "com.unity.modules.physics": "1.0.0"
       },
-      "hash": "54c3a9d755a3929f3726a47eed1e431ac5c01bb6"
+      "hash": "368405b54a80dc3298a60fc4576d518efd6b85f9"
     },
     "com.itkamianets.3d-unity-core": {
       "version": "https://github.com/IT-Kamianets/3d-unity-core.git",
@@ -133,7 +134,7 @@
         "com.unity.ugui": "2.6.0",
         "com.unity.inputsystem": "1.20.0"
       },
-      "hash": "8d7f460deeff2b81e1aa19e264696b3bec379f0b"
+      "hash": "b54e00b5ac69fc0e028e91d65d6fd1531dfc333b"
     },
     "com.itkamianets.3d-unity-ui": {
       "version": "https://github.com/IT-Kamianets/3d-unity-ui.git",
@@ -155,8 +156,17 @@
       },
       "hash": "bfe4d27e4e8efc131810b962c09c53fe3b3993b0"
     },
+    "com.itkamianets.temnorid-village": {
+      "version": "https://github.com/WebArtWork/temnorid-village.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.nuget.newtonsoft-json": "3.2.2"
+      },
+      "hash": "fca45eeafad421df28341841f5a906f5834774fb"
+    },
     "com.unity.ai.navigation": {
-      "version": "2.0.15",
+      "version": "2.0.16",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -194,12 +204,10 @@
       "dependencies": {}
     },
     "com.unity.ide.rider": {
-      "version": "3.0.38",
+      "version": "3.1.0",
       "depth": 0,
       "source": "registry",
-      "dependencies": {
-        "com.unity.ext.nunit": "1.0.6"
-      },
+      "dependencies": {},
       "url": "https://packages.unity.com"
     },
     "com.unity.ide.visualstudio": {
@@ -212,7 +220,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.inputsystem": {
-      "version": "1.20.0",
+      "version": "1.20.1",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -378,7 +386,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.services.wire": {
-      "version": "1.6.0",
+      "version": "1.6.1",
       "depth": 2,
       "source": "registry",
       "dependencies": {

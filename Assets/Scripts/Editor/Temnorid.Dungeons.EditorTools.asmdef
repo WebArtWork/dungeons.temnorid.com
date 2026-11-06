@@ -3,6 +3,7 @@
   "rootNamespace": "Temnorid.Dungeons.EditorTools",
   "references": [
     "Temnorid.Dungeons",
+    "Temnorid.Village",
     "Unity.AI.Navigation",
     "ITKamianets.Engine.Character",
     "ITKamianets.Engine.CharacterView.Camera",

@@ -55,6 +55,7 @@ namespace Temnorid.Dungeons
 			// The shell's bars (top, and the places at the bottom on a phone); the game's own screen lives between them.
 			_chrome = ShellChrome.Create(transform);
 			_chrome.PlaceSelected += OnPlace;
+			_chrome.SetTitle(DungeonSelection.Current.Name);
 			var hudObject = new GameObject("Hud", typeof(RectTransform));
 			hudObject.transform.SetParent(canvasObject.transform, false);
 			var hudRect = (RectTransform)hudObject.transform;
@@ -97,22 +98,20 @@ namespace Temnorid.Dungeons
 			_pause = Box("PauseMenu", root, new Vector2(0.35f, 0.32f), new Vector2(0.65f, 0.68f), new Color(0.06f, 0.05f, 0.09f, 0.92f));
 			Label(_pause.transform, "Title", "PAUSED", 56, TextAnchor.MiddleCenter, new Vector2(0f, 0.68f), new Vector2(1f, 0.96f), Gold);
 			Button(_pause.transform, "Resume", new Vector2(0.2f, 0.4f), new Vector2(0.8f, 0.62f), () => Game.SetPaused(false));
-			Button(_pause.transform, "Save, main menu", new Vector2(0.2f, 0.12f), new Vector2(0.8f, 0.34f), () => Game.QuitToMenu());
+			Button(_pause.transform, "Save and quit", new Vector2(0.2f, 0.12f), new Vector2(0.8f, 0.34f), () => Game.SaveAndQuit());
 			_pause.SetActive(false);
 
 			_victory = Box("Victory", root, new Vector2(0.28f, 0.14f), new Vector2(0.72f, 0.86f), new Color(0.06f, 0.05f, 0.09f, 0.94f));
 			_victoryTitle = Label(_victory.transform, "Title", "DUNGEON CLEARED", 60, TextAnchor.MiddleCenter, new Vector2(0f, 0.82f), new Vector2(1f, 0.97f), Gold);
 			_victoryBody = Label(_victory.transform, "Body", "", 32, TextAnchor.UpperCenter, new Vector2(0.05f, 0.34f), new Vector2(0.95f, 0.8f), Color.white);
 			var again = Game.Net == null;
-			if (again) Button(_victory.transform, "Play again", new Vector2(0.2f, 0.19f), new Vector2(0.8f, 0.31f), () => Game.Retry());
-			Button(_victory.transform, "Main menu", new Vector2(0.2f, 0.04f), new Vector2(0.8f, 0.16f), () => Game.QuitToMenu());
+			Button(_victory.transform, "Return to the arena", new Vector2(0.2f, 0.06f), new Vector2(0.8f, 0.2f), () => Game.ReturnToArena());
 			_victory.SetActive(false);
 
 			_defeat = Box("Defeat", root, new Vector2(0.32f, 0.3f), new Vector2(0.68f, 0.7f), new Color(0.1f, 0.03f, 0.03f, 0.94f));
 			Label(_defeat.transform, "Title", "YOU DIED", 64, TextAnchor.MiddleCenter, new Vector2(0f, 0.62f), new Vector2(1f, 0.95f), new Color(1f, 0.4f, 0.35f));
-			Label(_defeat.transform, "Note", "What you looted is kept.", 30, TextAnchor.MiddleCenter, new Vector2(0f, 0.5f), new Vector2(1f, 0.62f), Color.white);
-			if (again) Button(_defeat.transform, "Retry", new Vector2(0.2f, 0.26f), new Vector2(0.8f, 0.46f), () => Game.Retry());
-			Button(_defeat.transform, "Main menu", new Vector2(0.2f, 0.04f), new Vector2(0.8f, 0.22f), () => Game.QuitToMenu());
+			Label(_defeat.transform, "Note", "The hero is carried to the infirmary.", 30, TextAnchor.MiddleCenter, new Vector2(0f, 0.5f), new Vector2(1f, 0.62f), Color.white);
+			Button(_defeat.transform, "Return to the arena", new Vector2(0.2f, 0.1f), new Vector2(0.8f, 0.34f), () => Game.ReturnToArena());
 			_defeat.SetActive(false);
 
 			_heroPanel = Box("HeroPanel", root, new Vector2(0.2f, 0.06f), new Vector2(0.8f, 0.94f), new Color(0.06f, 0.05f, 0.09f, 0.94f));

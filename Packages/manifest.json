@@ -2,6 +2,7 @@
   "dependencies": {
     "com.itkamianets.3d-constructor-character-view-camera": "https://github.com/IT-Kamianets/3d-constructor-character-view-camera.git",
     "com.itkamianets.3d-constructor-character-view-controls": "https://github.com/IT-Kamianets/3d-constructor-character-view-controls.git",
+    "com.itkamianets.3d-unity-account": "https://github.com/IT-Kamianets/3d-unity-account.git",
     "com.itkamianets.3d-unity-ai": "https://github.com/IT-Kamianets/3d-unity-ai.git",
     "com.itkamianets.3d-unity-character": "https://github.com/IT-Kamianets/3d-unity-character.git",
     "com.itkamianets.3d-unity-combat": "https://github.com/IT-Kamianets/3d-unity-combat.git",
@@ -16,11 +17,13 @@
     "com.itkamianets.3d-unity-shell": "https://github.com/IT-Kamianets/3d-unity-shell.git",
     "com.itkamianets.3d-unity-ui": "https://github.com/IT-Kamianets/3d-unity-ui.git",
     "com.itkamianets.3d-unity-update": "https://github.com/IT-Kamianets/3d-unity-update.git",
-    "com.unity.nuget.newtonsoft-json": "3.2.2",
-    "com.unity.ai.navigation": "2.0.15",
-    "com.unity.ide.rider": "3.0.38",
+    "com.itkamianets.temnorid-village": "https://github.com/WebArtWork/temnorid-village.git",
+    "com.unity.ai.navigation": "2.0.16",
+    "com.unity.ide.rider": "3.1.0",
     "com.unity.ide.visualstudio": "2.0.26",
-    "com.unity.inputsystem": "1.20.0",
+    "com.unity.inputsystem": "1.20.1",
+    "com.unity.nuget.newtonsoft-json": "3.2.2",
+    "com.unity.pipeline": "0.9.1-exp.1",
     "com.unity.render-pipelines.universal": "17.6.0",
     "com.unity.test-framework": "1.8.0",
     "com.unity.timeline": "6.6.0",
@@ -61,8 +64,6 @@
     "com.unity.modules.vehicles": "1.0.0",
     "com.unity.modules.video": "1.0.0",
     "com.unity.modules.wind": "1.0.0",
-    "com.unity.modules.xr": "1.0.0",
-    "com.unity.pipeline": "0.9.1-exp.1",
-    "com.itkamianets.3d-unity-account": "https://github.com/IT-Kamianets/3d-unity-account.git"
+    "com.unity.modules.xr": "1.0.0"
   }
 }

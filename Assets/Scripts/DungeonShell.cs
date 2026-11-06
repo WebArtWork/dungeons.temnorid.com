@@ -19,14 +19,12 @@ namespace Temnorid.Dungeons
 				Repo = Repo,
 				InstallerSuffix = "-Setup.exe",
 				MaxPlayers = 4,
-				Multiplayer = true,
+				// One player, straight into the lord's arena after signing in: no landing screen, no lobby, no Profile for now.
+				Multiplayer = false,
+				Profile = false,
+				SkipLanding = true,
 				GameScene = "Main",
 				Accent = new Color(1f, 0.82f, 0.3f),
-				Places =
-				{
-					new ShellPlace("dungeon", "Dungeon", "D"),
-					new ShellPlace("hero", "Hero", "H"),
-				},
 			};
 		}
 	}
