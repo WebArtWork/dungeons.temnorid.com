@@ -75,22 +75,15 @@ Merge these into `dependencies` in `Packages/manifest.json`. Unity installs each
 
 ## Models and Assetra (`assetra.json`)
 
-`assetra.json` in the repository root lists every model the game needs. It is a valid
-[3d-asset-schema](https://3d.itkamianets.com/packages/3d-asset-schema) library (`schemaVersion`,
-`libraryId`, `units`, `assets`), so the same file works for the engine and for Assetra
-(assetra.itkamianets.com, a separate tool by another developer; following this file is optional).
+Every ITKP 3D game keeps its models the same way (rule: https://3d.itkamianets.com/docs/architecture), so any tool and any AI agent knows where a model is and where a new one goes.
 
-- **This project owns the list.** One asset per model: `id` (path-like, for example `props/bench`), `name`,
-  `kind: "model"`, `bounds` (the size the game uses), `placeholder` (shape and color shown until the
-  model exists) and `metadata` (tags, pivot, triangle budget).
-- **Empty or filled.** An asset without `source` is a placeholder waiting for a model. An asset with
-  `source` (`uri` relative to this file, `format: "glb"`) is filled.
-- **Adding a model:** put the GLB under `Assets/Models/`, add or update its entry in `assetra.json`, and the
-  next Assetra sync publishes it. Never delete an entry just because its file is missing: ask first.
-- **Sync** (`3d-unity-assetra`) pushes this list to the Assetra project `dungeons-temnorid` and pulls the models
-  that were filled there into the `source` path. The developer decides what is in the list; sync never
-  removes entries or overwrites files on its own.
-- Model rules: GLB, meters, +Y up, +Z front, bottom-center pivot.
+- **One GLB per asset id**, at `Assets/Models/<group>/<name>.glb`. The id `props/bench` is `Assets/Models/props/bench.glb`. An id is `group/name` (lowercase letters, digits, dashes) and never changes once the game uses it: the id is the slot, the file only fills it.
+- **`assetra.json`** in the repository root lists every model: `id`, `name`, `kind: "model"`, `bounds` (size in meters), `placeholder` (shape and color shown until the model exists) and `metadata`. `source.uri` is the GLB path above; an entry without `source` is a placeholder waiting for a model. It is a valid [3d-asset-schema](https://3d.itkamianets.com/packages/3d-asset-schema) library, so the engine reads it too.
+- **Working files** (FBX, OBJ, Blender files, generator output) are not listed and do not go in `Assets/Models`.
+- **Adding or swapping a model:** put or overwrite the GLB at its path and update its entry. Never delete an entry just because its file is missing: ask first.
+- **Assetra** (assetra.itkamianets.com, a separate tool by another developer; using it is optional) reads this layout: it fills slots from its library, replaces a model when the file differs and removes the old version. A sync never removes entries or overwrites files without the developer deciding.
+- Model rules: GLB, meters, +Y up, +Z front, bottom-center pivot, textures embedded, at most 7 MB.
+
 ## Rules
 
 - **Read input only through `3d-unity-input`.** Never read devices directly.
